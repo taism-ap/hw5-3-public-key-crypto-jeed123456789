@@ -18,7 +18,7 @@ X(n+1) = [A*X(n) + B]mod(N)
 X(0) is known as the “seed” of the pseudo-random-number generator.
 
 example:
-A=533, B=277, N=64, and X(0) = 125
+A=533, B=227, N=64, and X(0) = 125
 
 X(1) =  
 X(2) =  
