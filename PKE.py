@@ -1,16 +1,17 @@
 # code for public key encryption
-def xor(msg, key):
+
+def xor(msg, key): # XOR method given two strings msg and key to
     encrypted_msg = int(msg,2) ^ int(key,2)
     output = '{0:0{1}b}'.format(encrypted_msg,len(msg))
     return output
 
-def PRNG(seed):
+def PRNG(seed, msg_binary):
     CONST_A = 533
     CONST_B = 227
     CONST_N = 64
     key_parts = [seed]
     temp = 0
-    for i in range(4):
+    for i in range(int(len(msg_binary)/8 + 1)):
         temp  = (CONST_A*key_parts[i]+CONST_B)%CONST_N
         key_parts.append(temp)
     key_parts.remove(seed)
@@ -47,7 +48,8 @@ print('Public Key is', pow(CONST_C, CONST_private_key, CONST_N))
 msg_to_encrypt = input('Give me a message to encrypt:\n')
 msg_binary = convert_letter_ascii(msg_to_encrypt)
 seed = PKE(CONST_private_key, CONST_N)
-binary_key = PRNG(seed)
+binary_key = PRNG(seed, msg_binary)
+
 print('Encrypted msg is\n'+ xor(msg_binary, binary_key))
 msg_to_decrypt = input('Give me a message to decrypt:\n')
 decrypt_binary = xor(msg_to_decrypt, binary_key)
